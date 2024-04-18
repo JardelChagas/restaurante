@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  catalog_db:
+    container_name: 'catalog_db'
+    image: postgres:latest
+    tty: true
+    restart: always
+    volumes:
+      - ./catalog/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - restaurante_net
+    environment:
+      - 'POSTGRES_DB=catalog'
+      - 'POSTGRES_PASSWORD=mypaz'
+      - 'POSTGRES_USER=root'
+    ports:
+      - '5432:5432'
+
+networks:
+  restaurante_net:
+    driver: bridge
